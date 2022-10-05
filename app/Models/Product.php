@@ -24,11 +24,11 @@ class Product extends Model
     ];
     
     public function galleries(){
-        return $this->hasMany(ProductGallery::class, 'product_id', 'id');
+        return $this->hasMany(ProductGallery::class, 'products_id', 'id');
     }
 
     public function category(){
-        return $this->hasMany(ProductCategory::class, 'categories_id', 'id');
+        return $this->belongsTo(ProductCategory::class, 'categories_id', 'id');
     }
     
 }

@@ -83,9 +83,41 @@ class UserController extends Controller
     }
 
     public function fetch(Request $request){
-        return ResponseFormatter::success([
+        return ResponseFormatter::success(
             $request->user(),
-            'message' => 'Data profile user berhasil diambil'
+            'Data profile user berhasil diambil'
+        );
+    }
+
+    public function updateProfile(Request $request){
+        $request->validate([
+            'name' => ['required','string','max:255'],
+            'username' => ['required','string','max:255','unique:users'],
+            'email' => ['required','string','max:255','unique:users'],
+            'phone' => ['nullable','string','max:255'],
+            'password' => ['required','string',new Password],
         ]);
+
+        $user = Auth::user();
+        $user->update([
+            'name' => $request->name,
+            'username' => $request->username,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'password' => Hash::make($request->password),
+        ]);
+
+        return ResponseFormatter::success(
+            $user,
+           'Profile Updated'
+        );
+    }
+
+    public function logout(Request $request){
+        $token = $request->user()->currentAccessToken()->delete();
+        return ResponseFormatter::success(
+            $token,
+            'Token Removed'
+        );
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTransactionsItemsTable extends Migration
+class CreateTransactionItemsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateTransactionsItemsTable extends Migration
      */
     public function up()
     {
-        Schema::create('transactions_items', function (Blueprint $table) {
+        Schema::create('transaction_items', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('users_id');
-            $table->bigInteger('product_id');
-            $table->bigInteger('transactions');
+            $table->bigInteger('products_id');
+            $table->bigInteger('transactions_id');
             $table->bigInteger('quantity');
             $table->timestamps();
         });

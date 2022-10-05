@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\TransactionItem;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Transaction extends Model
 {
@@ -29,7 +30,7 @@ class Transaction extends Model
     }
 
     public function items(){
-        return $this->hasMany(Transaction::class, 'transactions_id', 'id');
+        return $this->hasMany(TransactionItem::class, 'transactions_id', 'id');
     }
     
 }
